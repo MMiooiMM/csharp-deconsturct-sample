@@ -12,10 +12,13 @@ namespace DeconsturctDemo
             (year, month, day) = new DateTime(2021, 05, 16);
             Log(year, month, day);
 
+            var (p1, p2) = new TestClass();
+            Console.WriteLine($"p1 = {p1}, p2 = {p2}");
+
             _ = Console.ReadKey();
         }
 
-        static void Log(int year, int month, int day)
+        private static void Log(int year, int month, int day)
         {
             Console.WriteLine($"Year = {year}, Month = {month}, Day = {day}.");
         }
@@ -38,6 +41,27 @@ namespace DeconsturctDemo
             year = dateTime.Year;
             month = dateTime.Month;
             day = dateTime.Day;
+        }
+    }
+
+    internal class TestClass
+    {
+        public int Property1 { get; set; }
+        public int Property2 { get; set; }
+
+        public void Deconstruct(out int p1, out int p2)
+        {
+            p1 = 1;
+            p2 = 2;
+        }
+    }
+
+    internal static class TestClassExtension
+    {
+        public static void Deconstruct(out int p1, out int p2)
+        {
+            p1 = 10;
+            p2 = 20;
         }
     }
 }
